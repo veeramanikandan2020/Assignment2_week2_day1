@@ -11,42 +11,51 @@ public class CheckBox {
 		
 		driver.navigate().to("https://www.leafground.com/checkbox.xhtml");
 		
-		//driver.findElement(By.xpath("//div[@class='ui-chkbox-box ui-widget ui-corner-all ui-state-default ui-state-active']")).click();
-		
-		//driver.findElement(By.xpath("//span[@class='ui-chkbox-icon ui-icon ui-c ui-icon-blank']")).click();
-		
-		driver.findElement(By.xpath("(//div[contains(@class,'ui-chkbox-box ui-widget')])[1]")).click();
-		
+		//Basic Checkbox
+		driver.findElement(By.xpath("//div[@class='ui-selectbooleancheckbox ui-chkbox ui-widget']/div[2]")).click();
+				
 		driver.findElement(By.xpath("(//div[contains(@class,'ui-chkbox-box ui-widget')])[2]")).click();
 		
 		driver.findElement(By.xpath("(//div[contains(@class,'ui-chkbox-box ui-widget')])[3]")).click();
 		
 		driver.findElement(By.xpath("//div[@class='ui-toggleswitch-slider']")).click();
 		
-		driver.findElement(By.xpath("(//div[contains(@class,'ui-chkbox-box ui-widget')])[8]")).click();
+		//Tristates
 		
-		driver.findElement(By.xpath("(//div[contains(@class,'ui-chkbox-box ui-widget')])[8]")).click();
+		driver.findElement(By.xpath("//div[contains(@data-iconstates,'[\"\",\"ui-icon ui-icon-check')]")).click();
 		
-		driver.findElement(By.xpath("(//div[contains(@class,'ui-chkbox-box ui-widget')])[8]")).click();
+		Thread.sleep(2000);
 		
-		boolean enabled =driver.findElement(By.xpath("(//div[contains(@class,'ui-selectbooleancheckbox ui-chkbox')])[3]")).isEnabled();
+		driver.findElement(By.xpath("//div[contains(@data-iconstates,'[\"\",\"ui-icon ui-icon-check')]")).click();
 		
-		System.out.println(driver.findElement(By.xpath("(//div[@class='ui-selectbooleancheckbox ui-chkbox ui-widget'])[3]")).isEnabled());
+		Thread.sleep(2000);
 		
-		System.out.println(enabled);
+		driver.findElement(By.xpath("//div[contains(@data-iconstates,'[\"\",\"ui-icon ui-icon-check')]")).click();
 		
-		if(enabled)
-			System.out.println("check box Enabled");
+		Thread.sleep(2000);
+		
+		// isSelected is checked works fine
+		
+		boolean selected = driver.findElement(By.xpath("(//div[contains(@class,'ui-selectbooleancheckbox ui-chkbox')])[3]")).isSelected();
+		
+		if(selected == true)
+			System.out.println("check box is Enabled");
 		else
-			System.out.println("Check box Disabled");
-	
-		driver.findElement(By.xpath("//ul[contains(@class,'ui-selectcheckboxmenu-multiple')]")).click();
-	
-		driver.findElement(By.xpath("(//div[contains(@class,'ui-chkbox-box ui-widget')])[12]")).click();
-	
-		driver.findElement(By.xpath("(//div[contains(@class,'ui-chkbox-box ui-widget')])[17]")).click();
+			System.out.println("Check box is Disabled");
 		
-		driver.findElement(By.xpath("(//div[contains(@class,'ui-chkbox-box ui-widget')])[14]")).click();
+		//Select Multiple Checkbox Window
+		
+		driver.findElement(By.xpath("//ul[@data-label='Cities']")).click();
+	
+		//London - Grandparent to Grand child
+		
+		driver.findElement(By.xpath("(//li[@data-item-value='London']//div)[3]")).click();
+	
+		// Berlin - Grandparent to Grandchild
+		driver.findElement(By.xpath("(//li[@data-item-value='Berlin']//div)[3]")).click();
+		
+		// Rome - - Grandparent to Grandchild
+		driver.findElement(By.xpath("(//li[@data-item-value='Rome']//div)[3]")).click();
 	
 		driver.findElement(By.xpath("//a[@class='ui-selectcheckboxmenu-close ui-corner-all']")).click();
 		
